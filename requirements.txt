@@ -1,0 +1,17 @@
+# Core
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+
+# AI / ML
+openai>=1.30.0              # GPT + Whisper API
+sentence-transformers>=2.7  # local embeddings (all-MiniLM-L6-v2)
+faiss-cpu>=1.8.0            # vector search
+numpy>=1.26.0
+
+# Optional: local Whisper
+# openai-whisper>=20231117
+
+# Dev / testing
+pytest>=8.0.0
+httpx>=0.27.0               # async test client for FastAPI
