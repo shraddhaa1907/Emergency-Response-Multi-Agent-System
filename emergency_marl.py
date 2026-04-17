@@ -40,9 +40,8 @@ from collections import defaultdict
 import json
 import os
 
-# ─────────────────────────────────────────────────────────────────
+
 # PARAMETERS
-# ─────────────────────────────────────────────────────────────────
 EPISODES       = 2000
 MAX_STEPS      = 50
 ALPHA          = 0.1        # learning rate
@@ -63,9 +62,7 @@ HOSP_LEVELS = 3   # hospital load
 TIME_SLOTS  = 5   # time of day
 NUM_STATES  = SEV_LEVELS * CALL_TYPES * TRAF_LEVELS * HOSP_LEVELS * TIME_SLOTS  # 900
 
-# ─────────────────────────────────────────────────────────────────
 # NEMSIS-CALIBRATED DATA GENERATOR
-# ─────────────────────────────────────────────────────────────────
 # Real-world distributions from NEMSIS 2023 Annual Report
 # Call type proportions: cardiac 18%, trauma 22%, respiratory 20%,
 #                        stroke 10%, other 30%
@@ -119,9 +116,8 @@ def decode_state(s):
     return sev, call, traffic, hosp, time
 
 
-# ─────────────────────────────────────────────────────────────────
+
 # REWARD FUNCTIONS  (NEMSIS-inspired clinical outcomes)
-# ─────────────────────────────────────────────────────────────────
 # Response time targets from NFPA 1710 standard:
 #   - BLS on scene: ≤ 4 min (240 sec) in urban
 #   - ALS on scene: ≤ 8 min (480 sec)
@@ -244,9 +240,8 @@ def compute_shared_reward(state_decoded, agent_actions):
     return bonus
 
 
-# ─────────────────────────────────────────────────────────────────
+
 # Q-TABLES + TRAINING
-# ─────────────────────────────────────────────────────────────────
 Q_tables = {agent: np.zeros((NUM_STATES, NUM_ACTIONS)) for agent in AGENTS}
 
 # Metrics
@@ -361,9 +356,7 @@ for episode in range(EPISODES):
               f"Resp: {avg_resp:.1f}min | TriageAcc: {triage_acc:.1f}%")
 
 
-# ─────────────────────────────────────────────────────────────────
 # SAVE OUTPUTS
-# ─────────────────────────────────────────────────────────────────
 os.makedirs("outputs", exist_ok=True)
 
 # 1. Training log CSV
